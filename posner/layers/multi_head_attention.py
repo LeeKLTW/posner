@@ -46,6 +46,7 @@ class MultiHeadAttention(keras.layers.Layer):
       bias_constraint: Constraints for linear mappings.
       **kwargs:
     """
+    super(MultiHeadAttention, self).__init__(**kwargs)
     self.head_num = head_num
     self.activation = keras.activations.get(activation)
     self.use_bias = use_bias
@@ -59,7 +60,6 @@ class MultiHeadAttention(keras.layers.Layer):
     self.Wq, self.Wk, self.Wv, self.Wo = None, None, None, None
     self.bq, self.bk, self.bv, self.bo = None, None, None, None
 
-    super(MultiHeadAttention, self).__init__(**kwargs)
 
   def get_config(self):
     config = {
