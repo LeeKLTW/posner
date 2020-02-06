@@ -35,15 +35,15 @@ class MultiHeadAttention(keras.layers.Layer):
     """Initialize the layer.
 
     Args:
-      head_num:
-      activation:
-      use_bias:
-      kernel_initializer:
-      bias_initializer:
-      kernel_regularizer:
-      bias_regularizer:
-      kernel_constraint:
-      bias_constraint:
+      head_num: Number of heads.
+      activation: Activations for linear mappings.
+      use_bias: Whether to use bias term.
+      kernel_initializer: Initializer for linear mappings.
+      bias_initializer: Initializer for linear mappings.
+      kernel_regularizer: Regularizer for linear mappings.
+      bias_regularizer: Regularizer for linear mappings.
+      kernel_constraint: Constraints for linear mappings.
+      bias_constraint: Constraints for linear mappings.
       **kwargs:
     """
     self.head_num = head_num
