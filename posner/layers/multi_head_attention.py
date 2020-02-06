@@ -150,7 +150,7 @@ class MultiHeadAttention(keras.layers.Layer):
         name=f"{self.name}_bk"
       )
 
-      self.bq = self.add_weight(
+      self.bv = self.add_weight(
         shape=(feature_dim,),
         initializer=self.bias_initializer,
         regularizer=self.bias_regularizer,
