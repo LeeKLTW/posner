@@ -23,6 +23,7 @@ class LayerNormalization(keras.layers.Layer):
                gamma_constraint=None,
                beta_constraint=None,
                **kwargs):
+    #TODO: add documentation
     super(LayerNormalization, self).__init__(**kwargs)
     self.support_masking = True
     self.center = center
