@@ -45,8 +45,10 @@ class PositionEmbedding(keras.layers.Layer):
                output_dim=None,
                **kwargs):
     """
-    :param output_dim: The embedding dimension.
-    :param kwargs:
+    Args:
+      mode: 'expand', 'add', 'concat'
+      output_dim: The embedding dimension.
+      **kwargs:
     """
     if mode in [self.MODE_EXPAND, self.MODE_CONCAT]:
       if output_dim is None:
@@ -55,10 +57,10 @@ class PositionEmbedding(keras.layers.Layer):
       if output_dim % 2 != 0:
         raise NotImplementedError(
           'It does not make sense to use an odd output dimension: %d' % output_dim)
+    super(PositionEmbedding, self).__init__(**kwargs)
     self.mode = mode
     self.output_dim = output_dim
     self.supports_masking = True
-    super(PositionEmbedding, self).__init__(**kwargs)
 
   def get_config(self):
     config = {
@@ -77,3 +79,42 @@ class PositionEmbedding(keras.layers.Layer):
     if self.mode == self.MODE_CONCAT:
       return input_shape[:-1] + (input_shape[-1] + self.output_dim,)
     return input_shape
+
+  def call(self, inputs, mask=None):
+    input_shape = K.shape(inputs)
+    if self.mode == self.MODE_ADD:
+      batch_size, seg_len, output_dim = input_shape[0],input_shape[1],input_shape[2]
+      pos_input = K.tile(K.expand_dims(K.arange(0, seg_len), axis=0), [batch_size,1])
+    elif self.mode == self.MODE_CONCAT:
+      batch_size, seg_len, output_dim = input_shape[0],input_shape[1],self.output_dim
+      pos_input = K.tile(K.expand_dims(K.arange(0, seg_len), axis=0), [batch_size,1])
+    else:
+      output_dim = self.output_dim
+      pos_input = inputs
+    if K.dtype(pos_input) != K.floatx():
+      pos_input = K.cast(pos_input, K.floatx())
+    evens = K.arange(0, output_dim//2) * 2
+    odds = K.arange(0, output_dim//2) * 2 + 1
+
+    even_embedding = K.sin(
+      K.dot(
+        K.expand_dims(pos_input,-1),
+        K.expand_dims(
+          1.0/K.pow(10000.0,K.cast(evens,K.floatx())/
+                                K.cast(output_dim,K.floatx())),0))
+    )
+
+    odd_embedding = K.cos(
+      K.dot(
+        K.expand_dims(pos_input,-1),
+        K.expand_dims(
+          1.0/K.pow(10000.0,K.cast(odds-1,K.floatx())/
+                                K.cast(output_dim,K.floatx())),0))
+    )
+    embedding = K.stack([even_embedding, odd_embedding], axis=-1)
+    output = K.reshape(embedding, [-1, K.shape(inputs)[1], output_dim])
+    if self.mode == self.MODE_CONCAT:
+      output = K.concatenate([inputs, output], axis=-1)
+    if self.mode == self.MODE_ADD:
+      output += inputs
+    return output
