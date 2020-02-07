@@ -108,6 +108,14 @@ class MultiHeadAttention(keras.layers.Layer):
       constraint=self.kernel_constraint,
       name=f"{self.name}_Wq"
     )
+    if self.use_bias:
+      self.bq = self.add_weight(
+        shape=(feature_dim,),
+        initializer=self.bias_initializer,
+        regularizer=self.bias_regularizer,
+        constraint=self.bias_constraint,
+        name=f"{self.name}_bq"
+      )
 
     self.Wk = self.add_weight(
       shape=(int(k[-1]), feature_dim),
@@ -116,6 +124,14 @@ class MultiHeadAttention(keras.layers.Layer):
       constraint=self.kernel_constraint,
       name=f"{self.name}_Wk"
     )
+    if self.use_bias:
+      self.bk = self.add_weight(
+        shape=(feature_dim,),
+        initializer=self.bias_initializer,
+        regularizer=self.bias_regularizer,
+        constraint=self.bias_constraint,
+        name=f"{self.name}_bk"
+      )
 
     self.Wv = self.add_weight(
       shape=(int(v[-1]), feature_dim),
@@ -124,6 +140,14 @@ class MultiHeadAttention(keras.layers.Layer):
       constraint=self.kernel_constraint,
       name=f"{self.name}_Wv"
     )
+    if self.use_bias:
+      self.bv = self.add_weight(
+        shape=(feature_dim,),
+        initializer=self.bias_initializer,
+        regularizer=self.bias_regularizer,
+        constraint=self.bias_constraint,
+        name=f"{self.name}_bv"
+      )
 
     self.Wo = self.add_weight(
       shape=(feature_dim, feature_dim),
@@ -134,30 +158,6 @@ class MultiHeadAttention(keras.layers.Layer):
     )
 
     if self.use_bias:
-      self.bq = self.add_weight(
-        shape=(feature_dim,),
-        initializer=self.bias_initializer,
-        regularizer=self.bias_regularizer,
-        constraint=self.bias_constraint,
-        name=f"{self.name}_bq"
-      )
-
-      self.bk = self.add_weight(
-        shape=(feature_dim,),
-        initializer=self.bias_initializer,
-        regularizer=self.bias_regularizer,
-        constraint=self.bias_constraint,
-        name=f"{self.name}_bk"
-      )
-
-      self.bv = self.add_weight(
-        shape=(feature_dim,),
-        initializer=self.bias_initializer,
-        regularizer=self.bias_regularizer,
-        constraint=self.bias_constraint,
-        name=f"{self.name}_bv"
-      )
-
       self.bo = self.add_weight(
         shape=(feature_dim,),
         initializer=self.bias_initializer,
