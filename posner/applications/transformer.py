@@ -55,7 +55,7 @@ def _wrap_layer(name,
       kernel_initializer=keras.initializers.TruncatedNormal(mean=0.0, stddev=0.001),
       name=f"{name}-Adapter"
     )(dropout_layer)
-    dropout_layer = keras.layer.Add(name=f"{name}-Adapter-Add")([dropout_layer, adapter])
+    dropout_layer = keras.layers.Add(name=f"{name}-Adapter-Add")([dropout_layer, adapter])
   add_layer = keras.layers.Add(name=f"{name}-Add")([input_layer, dropout_layer])
   normal_layer = LayerNormalization(trainable=trainable,
                                     name=f"{name}-Norm",
