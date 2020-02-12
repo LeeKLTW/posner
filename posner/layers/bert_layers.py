@@ -197,6 +197,9 @@ class TokenEmbedding(keras.layers.Embedding):
   def call(self, inputs):
     return [super(TokenEmbedding, self).call(inputs), self.embeddings + 0]
 
+  def get_config(self):
+    return super(TokenEmbedding, self).get_config()
+
 
 class TaskEmbedding(keras.layers.Layer):
   """Embedding for tasks.
@@ -252,14 +255,14 @@ class TaskEmbedding(keras.layers.Layer):
     return dict(list(base_config.items())+list(config.items()))
 
   def build(self, input_shape):
-    self.embeddings = self.add_weights(
+    self.embeddings = self.add_weight(
       shape=(self.input_dim, self.output_dim),
       initializer=self.embeddings_initializer,
       regularizer=self.embeddings_regularizer,
       constraint=self.embeddings_constraint,
       name="embeddings",
     )
-    super(TokenEmbedding,self).build(input_shape)
+    super(TaskEmbedding,self).build(input_shape)
 
   def compute_mask(self, inputs, mask=None):
     output_mask = None
@@ -307,7 +310,7 @@ class EmbeddingSimilarity(keras.layers.Layer):
     self.bias = None
 
   def build(self,input_shape):
-    self.bias = self.add_weights(
+    self.bias = self.add_weight(
       shape=(int(input_shape[1][0]),),
       initializer=self.initializer,
       regularizer=self.regularizer,
@@ -375,6 +378,10 @@ class Masked(keras.layers.Layer):
       return [input_shape[0], input_shape[0][:-1]]
     return input_shape[0]
 
+  def get_config(self):
+    return super(Masked, self).get_config()
+
+
 class Extract(keras.layers.Layer):
   """Extract from index.
   See: https://arxiv.org/pdf/1810.04805.pdf
@@ -392,3 +399,6 @@ class Extract(keras.layers.Layer):
 
   def compute_output_shape(self, input_shape):
     return input_shape[:1] + input_shape[2:]
+
+  def get_config(self):
+    return super(Extract, self).get_config()
