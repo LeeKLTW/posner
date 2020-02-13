@@ -65,7 +65,7 @@ class ScaledDotProductAttention(keras.layers.Layer):
     if isinstance(mask, list):
       mask = mask[1]
     feature_dim = K.shape(query)[-1]
-    e = K.batch_dot(query, key) / K.sqrt(K.cast(feature_dim, dtype=K.floatx()))
+    e = K.batch_dot(query, key,axes=2) / K.sqrt(K.cast(feature_dim, dtype=K.floatx()))
     e = K.exp(e - K.max(e, axis=-1, keepdims=True))  # prepare softmax
     if mask is not None:
       e *= K.cast(K.expand_dims(mask, axis=-2), K.floatx())
