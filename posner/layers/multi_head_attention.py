@@ -221,8 +221,9 @@ class MultiHeadAttention(keras.layers.Layer):
     batch_size, seq_len, feature_dim = input_shape[0],input_shape[1],input_shape[2]
     head_dim = feature_dim // head_num
     x = K.reshape(x,(batch_size, seq_len, head_num, head_dim)) # seperate head_num & head_dim
-    x = K.permute_dimensions(x, [0, 2, 1, 3]) # (batch_size, head_num, seq_len, head_dim)
-    return K.reshape(x, (batch_size * head_num, seq_len, feature_dim * head_dim))
+    x = tf.transpose(x, [0, 2, 1, 3]) # (batch_size, head_num, seq_len, head_dim)
+    return K.reshape(x, (batch_size * head_num, seq_len, head_dim))
+
 
   @classmethod
   def _reshape_from_batches(cls, x, head_num):
