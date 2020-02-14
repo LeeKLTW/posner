@@ -1,5 +1,5 @@
 # POSNER
-A toolkit implemented state-of-art models in Chinese word segmentation(CWS), part-of-speech (POS), and Name Entity Recognition(NER).
+A toolkit implementing state-of-art models in Chinese word segmentation(CWS), part-of-speech (POS), and Name Entity Recognition(NER).
 
 ## Getting Started
 ### Prerequisites
@@ -339,11 +339,12 @@ predictions, is popular in NLP sequence labeling.
 Though pure NN sequence model is capable of NER labeling, combined with CRF will 
 make it more efficient.  For example in POS,
 
-`
+```
 input: "学习出一个模型，然后再预测出一条指定"
 expected output: 学/B 习/E 出/S 一/B 个/E 模/B 型/E ，/S 然/B 后/E 再/E 预/B 测/E ……
 NN sequence model: 学/B 习/E 出/S 一/B 个/B 模/B 型/E ，/S 然/B 后/B 再/E 预/B 测/E ……
-`
+```
+
 The B should not come after B(begin of word), and this can be eliminate in CRF.
  
  
