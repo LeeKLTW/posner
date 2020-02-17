@@ -423,6 +423,7 @@ Reference:
 * [fxsjy/jieba](https://github.com/fxsjy/jieba)
 * [ckiplab/ckiptagger](https://github.com/ckiplab/ckiptagger)
 * [ymcui/Chinese-BERT-wwm](https://github.com/ymcui/Chinese-BERT-wwm)
+* [hankcs/HanLP](https://github.com/hankcs/HanLP)
 
 
 ### Books & Paper & Website
