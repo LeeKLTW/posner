@@ -312,7 +312,7 @@ Epoch 1/3
 
 ## Implementation detail
 ### pretrained
-Instead the original([BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)) pretrained model, 
+Instead of the original([BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)) pretrained model, 
 whole word masking pretrained model(
 [Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/pdf/1906.08101.pdf)) is recommended.
 Because Whole Word Masking (WWM) mitigates the drawbacks of masking partial 
