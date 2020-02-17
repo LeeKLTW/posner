@@ -444,6 +444,7 @@ Reference:
 * [Neural Joint Model for Transition-based Chinese Syntactic Analysis](http://www.aclweb.org/anthology/P17-1111)
 * [Fast and Accurate Neural Word Segmentation for Chinese](http://aclweb.org/anthology/P17-2096)
 * [Neural Word Segmentation Learning for Chinese](http://www.aclweb.org/anthology/P16-1039)
+* [Toward Fast and Accurate Neural Chinese Word Segmentation with Multi-Criteria Learning](https://arxiv.org/pdf/1903.04190.pdf)
 * [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/pdf/1909.11942)
 * [RoBERTa: A Robustly Optimized BERT Pretraining Approach](https://arxiv.org/abs/1907.11692)
 * [nlpprogress](https://nlpprogress.com/)
