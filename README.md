@@ -429,6 +429,7 @@ Reference:
 ### Books & Paper & Website
 * Daphne Koller & Nir Friedman. 2009, Probabilistic Graphical Models -- Principles and Techniques
 * CD Manning, 2008, Introduction to Information Retrieval
+* [Attention Is All You Need](https://arxiv.org/pdf/1706.03762)
 * [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/pdf/1810.04805.pdf)
 * [Pre-Training with Whole Word Masking for Chinese BERT](https://arxiv.org/pdf/1906.08101.pdf)
 * [Bridging nonlinearities and stochastic regularizers with gaussian error linear units](https://arxiv.org/pdf/1606.08415.pdf)
