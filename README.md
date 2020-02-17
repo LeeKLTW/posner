@@ -451,7 +451,7 @@ Reference:
 
 
 ## TODO list
-- [ ] API like [fxsjy/jieba](https://github.com/fxsjy/jieba)
+- [ ] API like [fxsjy/jieba](https://github.com/fxsjy/jieba) & [hankcs/HanLP](https://github.com/hankcs/HanLP)
 - [ ] word weight like [fxsjy/jieba](https://github.com/fxsjy/jieba)
 - [ ] XLNet
 - [ ] Albert
