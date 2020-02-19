@@ -41,6 +41,10 @@ flags.DEFINE_string(
 
 ## Other parameters
 flags.DEFINE_string(
+    "use_focal_loss", False,
+    "")
+
+flags.DEFINE_string(
     "data_dir", None,
     "The input data dir. Should contain the .tsv files (or other data files) "
     "for the task.")
@@ -498,9 +502,17 @@ def train_ner():
   warmup_steps=int(num_train_steps*FLAGS.warmup_proportion)
   optimizer = AdamWarmup(decay_steps=FLAGS.decay_steps,warmup_steps=warmup_steps)
 
-  model.compile(optimizer=optimizer,
-                loss='categorical_crossentropy',
-                metrics=[precision,recall,f1])
+  if FLAGS.use_focal_loss:
+    #TODO: test CategoricalFocalLoss
+    from posner.losses.focal_loss import CategoricalFocalLoss
+    focal_loss = CategoricalFocalLoss()
+    model.compile(optimizer=optimizer,
+                  loss=focal_loss,
+                  metrics=[precision,recall,f1])
+  else:
+    model.compile(optimizer=optimizer,
+                  loss='categorical_crossentropy',
+                  metrics=[precision,recall,f1])
 
   model.fit([x_train, np.zeros_like(x_train),np.ones_like(x_train)],
             y_train,
