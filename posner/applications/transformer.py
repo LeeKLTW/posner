@@ -232,6 +232,45 @@ def get_encoders(encoder_num,
   return last_layer
 
 
+
+def get_decoder_component(name,
+                          input_layer,
+                          encoded_layer,
+                          head_num,
+                          hidden_dim,
+                          attetion_activation=None,
+                          feed_forward_activation="relu",
+                          dropout_rate=0.0,
+                          trainable=True,
+                          use_adapter=False,
+                          adapter_units=None,
+                          adapter_activation="relu",
+                          ):
+  """ Multi-head self-attention, multi-head query attention and feed-forward layer.
+
+  Args:
+    name: Prefix of names for internal layers.
+    input_layer: Input layer.
+    encoded_layer: Encoded layer from encoder.
+    head_num: Number of heads in multi-head self-attention.
+    hidden_dim:  Hidden dimension of feed forward layer.
+    attetion_activation: Activation for multi-head self-attention.
+    feed_forward_activation: Activation for feed-forward layer.
+    dropout_rate: Dropout rate.
+    trainable: Whether the layers are trainable.
+    use_adapter: Whether to use feed-forward adapters before each residual connections.
+    adapter_units: The dimension of the first transformation in feed-forward adapter.
+    adapter_activation: The activation after the first transformation in feed-forward adapter.
+
+  Returns:
+    Output layer.
+
+  """
+  #TODO: continue
+  # adjust from encoders component.
+  pass
+
+
 def get_decoders(decoder_num,
                  input_layer,
                 encoded_layer,
