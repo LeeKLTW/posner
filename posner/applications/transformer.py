@@ -263,5 +263,7 @@ def get_decoders(decoder_num,
   Returns:
     Output layer.
   """
-  # TODO: continue decoders
-  pass
+  last_layer = input_layer
+  for i in range(decoder_num):
+    last_layer = get_decoder_component()
+  return last_layer
