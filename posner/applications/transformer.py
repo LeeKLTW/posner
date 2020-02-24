@@ -232,6 +232,36 @@ def get_encoders(encoder_num,
   return last_layer
 
 
-#TODO
-def get_decoders():
+def get_decoders(decoder_num,
+                 input_layer,
+                encoded_layer,
+                 head_num,
+                 hidden_dim,
+                 attention_activation=None,
+                 feed_forward_activation="relu",
+                 dropout_rate=0.0,
+                 trainable=True,
+                 use_adapter=False,
+                 adapter_units=None,
+                 adapter_activation="relu",):
+  """ Get decoders.
+
+  Args:
+    decoder_num: Number of decoder components.
+    input_layer: Input layer.
+    encoded_layer: Encoded layer from encoder.
+    head_num: Number of heads in multi-head self-attention.
+    hidden_dim: Hidden dimension of feed forward layer.
+    attention_activation: Activation for multi-head self-attention.
+    feed_forward_activation: Activation for feed-forward layer.
+    dropout_rate: Dropout rate.
+    trainable: Whether the layers are trainable.
+    use_adapter: Whether to use feed-forward adapters before each residual connections.
+    adapter_units: The dimension of the first transformation in feed-forward adapter.
+    adapter_activation: The activation after the first transformation in feed-forward adapter.
+
+  Returns:
+    Output layer.
+  """
+  # TODO: continue decoders
   pass
