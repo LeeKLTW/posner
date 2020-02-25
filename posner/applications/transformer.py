@@ -285,6 +285,22 @@ def get_decoder_component(name,
     adapter_activation=adapter_activation
   )
 
+  query_attention_layer = _wrap_layer(
+    name=query_attention_name,
+    input_layer=[self_attention_layer,encoded_layer,encoded_layer],
+    build_func=attention_builder(
+      name=query_attention_name,
+      head_num=head_num,
+      activation=attention_activation,
+      trainable=trainable,
+    ),
+    dropout_rate=dropout_rate,
+    trainable=trainable,
+    use_adapter=use_adapter,
+    adapter_units=adapter_units,
+    adapter_activation=adapter_activation
+  )
+
   #TODO: continue
   # adjust from encoders component.
   pass
