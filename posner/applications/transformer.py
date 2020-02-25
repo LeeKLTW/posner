@@ -300,6 +300,22 @@ def get_decoder_component(name,
     adapter_units=adapter_units,
     adapter_activation=adapter_activation
   )
+  feed_forward_layer = _wrap_layer(
+    name=feed_forward_name,
+    input_layer=query_attention_layer,
+    build_func=feed_forward_builder(
+      name=feed_forward_name,
+      hidden_dim=hidden_dim,
+      activation=feed_forward_activation,
+      trainable=trainable,
+    ),
+    dropout_rate=dropout_rate,
+    trainable=trainable,
+    use_adapter=use_adapter,
+    adapter_units=adapter_units,
+    attention_activation=attention_activation,
+  )
+
 
   #TODO: continue
   # adjust from encoders component.
