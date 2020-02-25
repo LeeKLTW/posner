@@ -238,7 +238,7 @@ def get_decoder_component(name,
                           encoded_layer,
                           head_num,
                           hidden_dim,
-                          attetion_activation=None,
+                          attention_activation=None,
                           feed_forward_activation="relu",
                           dropout_rate=0.0,
                           trainable=True,
@@ -266,6 +266,25 @@ def get_decoder_component(name,
     Output layer.
 
   """
+  self_attention_name = f"{name}-MultiHeadSelfAttention"
+  query_attention_name = f"{name}-MultiHeadSelfAttention"
+  feed_forward_name = f"{name}-FeedForward"
+  self_attention_layer = _wrap_layer(
+    name=self_attention_name,
+    input_layer=input_layer,
+    build_func=attention_builder(
+      name=self_attention_name,
+      head_num=head_num,
+      activation=attention_activation,
+      trainable=trainable,
+    ),
+    dropout_rate=dropout_rate,
+    trainable=trainable,
+    use_adapter=use_adapter,
+    adapter_units=adapter_units,
+    adapter_activation=adapter_activation
+  )
+
   #TODO: continue
   # adjust from encoders component.
   pass
