@@ -315,11 +315,7 @@ def get_decoder_component(name,
     adapter_units=adapter_units,
     attention_activation=attention_activation,
   )
-
-
-  #TODO: continue
-  # adjust from encoders component.
-  pass
+  return feed_forward_layer
 
 
 def get_decoders(decoder_num,
