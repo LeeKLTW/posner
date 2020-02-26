@@ -351,5 +351,18 @@ def get_decoders(decoder_num,
   """
   last_layer = input_layer
   for i in range(decoder_num):
-    last_layer = get_decoder_component()
+    last_layer = get_decoder_component(
+      name='Decoder-%d' % (i + 1),
+      input_layer=last_layer,
+      encoded_layer=encoded_layer,
+      head_num=head_num,
+      hidden_dim=hidden_dim,
+      attention_activation=attention_activation,
+      feed_forward_activation=feed_forward_activation,
+      dropout_rate=dropout_rate,
+      trainable=trainable,
+      use_adapter=use_adapter,
+      adapter_units=adapter_units,
+      adapter_activation=adapter_activation,
+    )
   return last_layer
